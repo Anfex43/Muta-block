@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MutaBlock GUI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .block {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>MUTABLOCK</h1>
+
+    <h2>Blockchain</h2>
+    <div id="blockchain-view"></div>
+
+    <h3>Add Block</h3>
+    <input type="text" id="block-data" placeholder="Enter block data" />
+    <button onclick="addBlock()">Add Block</button>
+
+    <h3>Modify Block</h3>
+    <input type="number" id="block-index" placeholder="Block Index" />
+    <input type="text" id="new-data" placeholder="New Block Data" />
+    <input type="password" id="secret-key" placeholder="Enter Secret Key" /> 
+    <button onclick="modifyBlock()">Modify Block</button>
+
+    <h3>Validate Blockchain</h3>
+    <button onclick="validateBlockchain()">Validate</button>
+    <div id="validation-result"></div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
