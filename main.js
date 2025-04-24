@@ -11,8 +11,8 @@ let mainWindow;
 app.on('ready', createWindow);
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1440,
+        height: 900,
         webPreferences: {
             preload: path.join(__dirname, 'renderer.js'), // Connect UI
             contextIsolation: false,
