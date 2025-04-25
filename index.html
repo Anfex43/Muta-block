@@ -20,7 +20,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: grey;
+            background-color: rgb(176, 176, 176);
             color: black;
             margin: 20px;
             
@@ -31,12 +31,12 @@
         h2 {
             color: #6A0DAD; 
             /* Line below forces heading text to have outline */ 
-            text-shadow: -1px -1px 0 rgb(71, 71, 71), 1px -1px 0 rgb(71, 71, 71),-1px  1px 0 rgb(71, 71, 71), 1px  1px 0 rgb(71, 71, 71);
+            text-shadow: -1px -1px 0 rgb(28, 28, 28), 1px -1px 0 rgb(28, 28, 28),-1px  1px 0 rgb(28, 28, 28), 1px  1px 0 rgb(28, 28, 28);
             
         }
         h3 {
             color: #6A0DAD; 
-            text-shadow: -1px -1px 0 rgb(71, 71, 71), 1px -1px 0 rgb(71, 71, 71),-1px  1px 0 rgb(71, 71, 71), 1px  1px 0 rgb(71, 71, 71);
+            text-shadow: -1px -1px 0 rgb(28, 28, 28), 1px -1px 0 rgb(28, 28, 28),-1px  1px 0 rgb(28, 28, 28), 1px  1px 0 rgb(28, 28, 28);
             text-align: center;
         }
         .block {
@@ -77,7 +77,14 @@
         <div class="inputs">
             <h2>Add Block</h2>
             <input type="text" id="block-data" placeholder="Enter block data" />
+            <input type="password" id="encryption-key" placeholder="Enter encryption password (optional)" />
             <button onclick="addBlock()">Add Block</button>
+
+            <h2>Decrypt Block Data</h2>
+            <input type="number" id="decrypt-index" placeholder="Block Index" />
+            <input type="password" id="decrypt-key" placeholder="Enter decryption password" />
+            <button onclick="decryptBlockData()">Decrypt Data</button>
+            <div id="decrypted-data"></div>
 
             <h2>Modify Block</h2>
             <input type="number" id="block-index" placeholder="Block Index" />
