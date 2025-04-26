@@ -1,7 +1,7 @@
 require('dotenv').config(); // Load environment variable for secure secret key storage
 const { app, ipcMain, BrowserWindow } = require('electron');
 const path = require('path');
-const Blockchain = require('./blockchain'); // Import blockchain logic
+const {Blockchain, decryptData} = require('./blockchain'); // Import blockchain logic
 
 // Initialize blockchain
 const secretKey = process.env.Secret_Key
@@ -25,8 +25,8 @@ function createWindow() {
 
 // IPC events from renderer process
 
-ipcMain.on('add-block', (event, data) => {
-    blockchain.addBlock(data);
+ipcMain.on('add-block', (event, {data, encryptionKey}) => {
+    blockchain.addBlock(data, encryptionKey);
     event.sender.send('blockchain-updated', blockchain);
 });
 
@@ -42,6 +42,24 @@ ipcMain.on('modify-block', (event, index, newData, enteredKey) => {
         event.sender.send('blockchain-updated', blockchain);
     } else {
         event.sender.send('modify-error', "Invalid block index.");
+    }
+});
+
+ipcMain.on('decrypt-block', (event, index, password) => {
+    try {
+        if (index < 0 || index >= blockchain.chain.length) {
+            event.sender.send('decryption-result', { error: 'Invalid block index' });
+            return;
+    }
+    const block = blockchain.chain[index];
+    if (!block.isEncrypted) {
+        event.sender.send('decryption-result', { error: 'This block is not encrypted'});
+        return;
+    }
+    const decryptedData = decryptData(block.data, block.iv, password);
+    event.sender.send('decryption-result', { data: decryptedData });
+    } catch (error) {
+        event.sender.send('decryption-result', { error: error.message });
     }
 });
 
