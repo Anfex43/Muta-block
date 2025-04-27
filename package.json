@@ -3,10 +3,16 @@
     "version": "1.0.0",
     "main": "main.js",
     "scripts": {
-        "start": "electron ."
+        "start": "electron .",
+        "prebuild": "node build-config.js",
+        "build": "electron-packager . MutaBlock --platform=win32 --arch=x64 --icon=MutablockLogo.png --out=dist --overwrite"
     },
     "dependencies": {
         "dotenv": "^16.5.0",
         "electron": "^25.9.8"
+    },
+    "devDependencies": {
+        "asar": "^3.2.0",
+        "electron-packager": "^17.1.2"
     }
 }

@@ -4,7 +4,14 @@ const path = require('path');
 const {Blockchain, decryptData} = require('./blockchain'); // Import blockchain logic
 
 // Initialize blockchain
-const secretKey = process.env.Secret_Key
+let secretKey; 
+try {
+    const config = require('./config.json');
+    secretKey = config.Secret_Key; // Read secret key config
+} catch (error) {
+    console.error("Error reading config:", error);
+    secretKey = process.env.Secret_Key || "default-secret-key-change-when-downloaded!";
+}
 const blockchain = new Blockchain(secretKey);
 
 let mainWindow;
