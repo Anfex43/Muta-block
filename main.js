@@ -26,7 +26,7 @@ function createWindow() {
             nodeIntegration: true,
         },
     });
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools(); 
     mainWindow.loadFile('index.html');
 }
 
